@@ -1,5 +1,5 @@
-package net.madvirus.spring4;
 
+package net.madvirus.spring4.chap1;
 import java.util.List;
 
 public class MavenBuildRunner implements BuildRunner{

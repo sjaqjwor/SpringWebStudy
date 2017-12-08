@@ -1,28 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id = "mvnBuildRunner" class="net.madvirus.spring4.MavenBuildRunner">
-            <property name="mavenPath">
-                <value>c:\apache-maven-3.1.1</value>
-            </property>
-    </bean>
+<bean id = "mvnBuildRunner" class="net.madvirus.spring4.MavenBuildRunner">
+<property name="mavenPath">
+<value>c:\apache-maven-3.1.1</value>
+</property>
+</bean>
 
-    <bean id = "Project" class="net.madvirus.spring4.Project">
+<bean id = "Project" class="net.madvirus.spring4.Project">
 
-        <property name = "srcDirs">
-            <list>
-                <value>src/</value>
-                <value>srcResource/</value>
-            </list>
-        </property>
-        <property name = "binDir">
-            <value>bin/</value>
-        </property>
-        <property name="buildRunner">
-            <!--mvnBuildRunner을 참조 -->
-            <ref bean="mvnBuildRunner" />
-        </property>
-    </bean>
+<property name = "srcDirs">
+<list>
+<value>src/</value>
+<value>srcResource/</value>
+</list>
+</property>
+<property name = "binDir">
+<value>bin/</value>
+</property>
+<property name="buildRunner">
+<!--mvnBuildRunner을 참조 -->
+<ref bean="mvnBuildRunner" />
+</property>
+</bean>
+
+<bean id = "user1" class = "net.madvirus.spring4.User">
+<constructor-arg value = "bkchol" />
+<constructor-arg value = "1234" />
+</bean> 
+
+<bean id="userRepository" class="net.madvirus.spring4.UserRepository">
+</bean>
+
+<bean id="pwChangeSve" class = "net.madvirus.spring4.PasswordChangeService">
+<constructor-arg ref="userRepository" />
+</bean>
+
+<bean id ="authFailLogger" class = "net.madvirus.spring4.AuthFailLogger">
+<property name = "threshold" value="5" />
+</bean>
+
+<bean id = "authService" class= "net.madvirus.spring4.AuthenticationService">
+<property name="failLogger" ref="authFailLogger" />
+<property name="userRepository" ref="userRepository" />
+</bean>
+
 </beans>

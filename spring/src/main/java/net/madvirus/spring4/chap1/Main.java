@@ -1,5 +1,5 @@
-package net.madvirus.spring4;
 
+package net.madvirus.spring4.chap1;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
