@@ -1,8 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+<context:annotation-config />
 <bean id = "user1" class="net.madvirus.spring4.chap2.User">
 <constructor-arg value ="bkchoi" />
 <constructor-arg value = "1234" />
@@ -34,6 +40,42 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
 <property name="failLogger" ref = "authFailLogger"/>
 <property name = "userRepository" ref="userRepository" />
 </bean>
+
+
+    <bean id="clientSearchFactory" class="net.madvirus.spring4.chap3.SearchClientFactoryBean">
+        <qualifier value="oa" />
+        <property name="server" value="10.20.30.40" />
+
+        <property name="encoding" value="utf8" />
+        <property name="contentTpye" value="json" />
+    </bean>
+
+
+    <bean id="orderSearchClientFactory"
+          class="net.madvirus.spring4.chap3.SearchClientFactoryBean">
+        <qualifier value="order" />
+        <property name="server" value="10.20.30.40" />
+        <property name="port" value="8888" />
+        <property name="contentTpye" value="json" />
+    </bean>
+
+    <bean id="productSearchClientFactory"
+          class="net.madvirus.spring4.chap3.SearchClientFactoryBean">
+        <qualifier value="order1" />
+        <property name="server" value="10.20.30.41" />
+        <property name="port" value="9999" />
+        <property name="contentTpye" value="json" />
+    </bean>
+
+
+    <bean id="pro" class="net.madvirus.spring4.chap3.ProductService" />
+    <bean id="ecFactory" class="net.madvirus.spring4.chap3.ErpClientFactory" factory-method="instance">
+        <constructor-arg>
+            <props>
+                <prop key="server">10.50.0.101</prop>
+            </props>
+        </constructor-arg>
+    </bean>
 
 </beans>
 
